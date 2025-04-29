@@ -1,4 +1,5 @@
 ﻿using Obligatorio.LogicaNegocio.CustomExceptions;
+using Obligatorio.LogicaNegocio.CustomExceptions.UsuarioExceptions;
 using Obligatorio.LogicaNegocio.Enumerados.UsuarioEnums;
 using Obligatorio.LogicaNegocio.VO.Usuarios;
 using System;
