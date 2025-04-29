@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Obligatorio.DTOs.DTOs.DTOsUsuario;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Obligatorio.LogicaAplicacion.ICasosUso.ICUUsuario
 {
     public interface ICUAltaUsuario
     {
-        void AltaFuncionario(DTOAltaUsuario dto);
+        void AltaUsuario(DTOAltaUsuario dto);
 
     }
 }
