@@ -11,4 +11,11 @@
     <ProjectReference Include="..\Obligatorio.Utilidades\Utilidades.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTOs\DTOsAgencia\" />
+    <Folder Include="DTOs\DTOsUsuario\" />
+    <Folder Include="DTOs\DTOsEnvio\" />
+    <Folder Include="Mappers\" />
+  </ItemGroup>
+
 </Project>
