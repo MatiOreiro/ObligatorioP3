@@ -9,6 +9,7 @@ namespace Obligatorio.LogicaNegocio.Enumerados.UsuarioEnums
     public enum Roles
     {
         Administrador,
-        Funcionario
+        Funcionario,
+        Cliente
     }
 }

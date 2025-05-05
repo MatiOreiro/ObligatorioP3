@@ -8,8 +8,19 @@ namespace Obligatorio.LogicaNegocio.Entidades
 {
     public class Seguimiento
     {
+        public int Id { get; init; }
         public Usuario Funcionario { get; init; }
         public string Comentario { get; init; }
         public DateTime Fecha { get; init; }
+
+        public Seguimiento()
+        {
+        }
+        public Seguimiento(Usuario funcionario, string comentario)
+        {
+            Funcionario = funcionario;
+            Comentario = comentario;
+            Fecha = DateTime.Now;
+        }
     }
 }

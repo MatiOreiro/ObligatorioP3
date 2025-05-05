@@ -18,6 +18,9 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public string Password { get; set; }
         public Roles Rol { get; set; }
 
+
+        public Usuario() { }
+
         public Usuario(NombreCompleto nombreCompleto, string email, string password, Roles rol)
         {
             NombreCompleto = nombreCompleto;

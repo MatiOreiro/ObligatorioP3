@@ -14,6 +14,9 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public string Direccion { get; set; }
         public Ubicacion Ubicacion { get; set; }
 
+        public Agencia() { }
+
+
         public Agencia(string nombre, string direccion, Ubicacion ubicacion)
         {
             Nombre = nombre;

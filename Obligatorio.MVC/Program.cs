@@ -2,8 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using Obligatorio.LogicaAccesoDatos;
 using Obligatorio.LogicaAccesoDatos.Repositorios;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
+using Obligatorio.LogicaAplicacion.CasosUso;
 using System.Runtime.InteropServices;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Obligatorio.LogicaAplicacion.ICasosUso;
 
 namespace Obligatorio.MVC
 {
@@ -25,10 +27,8 @@ namespace Obligatorio.MVC
             builder.Services.AddScoped<IRepositorioEnvio, RepositorioEnvio>();
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 
-
             //DI - CASOS USO
-
-            builder.Services.AddScoped<ICUAltaGenero, CUAltaGenero>();
+            builder.Services.AddScoped<ICULogin, CULogin>();
 
 
             builder.Services.AddSession();

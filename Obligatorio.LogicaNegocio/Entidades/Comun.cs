@@ -10,6 +10,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
     {
         public Agencia Agencia { get; set; }
 
+        public Comun() { }
         public Comun(Agencia agencia)
         {
             Agencia = agencia;

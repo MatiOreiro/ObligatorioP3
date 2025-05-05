@@ -10,6 +10,8 @@ namespace Obligatorio.LogicaNegocio.Entidades
     {
         public string Direccion { get; set; }
         public string Valor { get; set; }
+
+        public Urgente() { }
         public Urgente(string direccion, string valor)
         {
             Direccion = direccion;

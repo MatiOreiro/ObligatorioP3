@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Obligatorio.LogicaNegocio.Entidades;
+using Obligatorio.LogicaNegocio.VO.Agencias;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,27 @@ namespace Obligatorio.LogicaAccesoDatos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Usuario>().OwnsOne(a => a.NombreCompleto, n =>
+            {
+                n.Property(p => p.Nombre).HasColumnName("Nombre");
+                n.Property(p => p.Apellido).HasColumnName("Apellido");
+            });
+
+            modelBuilder.Entity<Agencia>().OwnsOne(a => a.Ubicacion, n =>
+            {
+                n.Property(p => p.Latitud).HasColumnName("Latitud");
+                n.Property(p => p.Longitud).HasColumnName("Longitud");
+            });
+
+            modelBuilder.Entity<Envio>()
+            .HasDiscriminator<string>("TipoDeEnvio")
+            .HasValue<Comun>("Comun")
+            .HasValue<Urgente>("Urgente");
+
+            modelBuilder.Entity<Envio>()
+            .Property(e => e.Peso)
+            .HasPrecision(18, 4);
         }
     }
 }
