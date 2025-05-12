@@ -2,10 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using Obligatorio.LogicaAccesoDatos;
 using Obligatorio.LogicaAccesoDatos.Repositorios;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
-using Obligatorio.LogicaAplicacion.CasosUso;
 using System.Runtime.InteropServices;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-using Obligatorio.LogicaAplicacion.ICasosUso;
+using Obligatorio.LogicaAplicacion.CasosUso.CUUsuario;
+using Obligatorio.LogicaAplicacion.ICasosUso.ICUUsuario;
 
 namespace Obligatorio.MVC
 {
@@ -26,9 +26,18 @@ namespace Obligatorio.MVC
             builder.Services.AddScoped<IRepositorioAgencia, RepositorioAgencia>();
             builder.Services.AddScoped<IRepositorioEnvio, RepositorioEnvio>();
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+            builder.Services.AddScoped<IRepositorioAuditoria, RepositorioAuditoria>();
 
             //DI - CASOS USO
             builder.Services.AddScoped<ICULogin, CULogin>();
+            builder.Services.AddScoped<ICUAltaUsuario, CUAltaUsuario>();
+            builder.Services.AddScoped<ICUEditarUsuario, CUEditarUsuario>();
+            builder.Services.AddScoped<ICUObtenerUsuarios, CUObtenerUsuarios>();
+            builder.Services.AddScoped<ICUObtenerUsuario, CUObtenerUsuario>();
+            builder.Services.AddScoped<ICUEditarUsuario, CUEditarUsuario>();
+            builder.Services.AddScoped<ICUEliminarUsuario, CUEliminarUsuario>();
+
+
 
 
             builder.Services.AddSession();

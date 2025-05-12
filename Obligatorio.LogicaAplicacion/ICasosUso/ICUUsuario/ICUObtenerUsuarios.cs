@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Obligatorio.LogicaAplicacion.ICasosUso
+namespace Obligatorio.LogicaAplicacion.ICasosUso.ICUUsuario
 {
-    public interface ICULogin
+    public interface ICUObtenerUsuarios
     {
-        UsuarioDTO VerificarDatosParaLogin(UsuarioDTO dto);
+        List<UsuarioDTO> ObtenerUsuarios();
 
     }
 }

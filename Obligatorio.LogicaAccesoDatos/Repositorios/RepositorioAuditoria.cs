@@ -12,7 +12,6 @@ namespace Obligatorio.LogicaAccesoDatos.Repositorios
     {
         public void Auditar(Auditoria nueva)
         {
-            throw new NotImplementedException();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Obligatorio.LogicaNegocio.CustomExceptions
+namespace Obligatorio.LogicaNegocio.CustomExceptions.AgenciaExceptions
 {
     public class UbicacionNoValidaException : Exception
     {

@@ -1,5 +1,5 @@
 ﻿using Obligatorio.DTOs.DTOs.DTOUsuario;
-using Obligatorio.LogicaAplicacion.ICasosUso;
+using Obligatorio.LogicaAplicacion.ICasosUso.ICUUsuario;
 using Obligatorio.LogicaNegocio.CustomExceptions.UsuarioExceptions;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Obligatorio.LogicaAplicacion.CasosUso
+namespace Obligatorio.LogicaAplicacion.CasosUso.CUUsuario
 {
     public class CULogin : ICULogin
     {

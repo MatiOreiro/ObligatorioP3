@@ -18,7 +18,7 @@ namespace Obligatorio.LogicaAccesoDatos.Repositorios
         }
         public int Add(Usuario nuevo)
         {
-            _context.Entry(nuevo.NombreCompleto).State = EntityState.Unchanged;
+           // _context.Entry(nuevo.NombreCompleto).State = EntityState.Unchanged;
             _context.Usuarios.Add(nuevo);
             _context.SaveChanges();
             return nuevo.Id;

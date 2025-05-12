@@ -34,5 +34,21 @@ namespace Obligatorio.LogicaNegocio.Entidades
                 throw new EmailNoValidoException("El email no tiene arroba");
             }
         }
+
+        public void Validar()
+        {
+            if (NombreCompleto == null)
+            {
+                throw new NombreNoValidoException("El nombre completo no puede estar vacío");
+            }
+            if (string.IsNullOrEmpty(Email))
+            {
+                throw new EmailNoValidoException("El email no puede ser nulo o vacio");
+            }
+            if (string.IsNullOrEmpty(Password))
+            {
+                throw new PasswordNoValidoException("La contraseña no puede ser nula o vacia");
+            }
+        }
     }
 }

@@ -14,5 +14,6 @@ namespace Obligatorio.DTOs.DTOs.DTOUsuario
         public string Email { get; set; }
         public string Password { get; set; }
         public string Rol { get; set; }
+        public int? LogueadoId { get; set; }
     }
 }

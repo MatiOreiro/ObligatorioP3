@@ -12,7 +12,7 @@ namespace Obligatorio.DTOs.Mappers
 {
     public class MapperUsuario
     {
-        public static Usuario FromDTOUsuarioToUsuario(UsuarioDTO dto)
+        public static Usuario FromDTOAltaUsuarioToUsuario(AltaUsuarioDTO dto)
         {
 
             var r = Roles.Administrador;
@@ -25,13 +25,30 @@ namespace Obligatorio.DTOs.Mappers
                 r = Roles.Cliente;
             }
 
-                string passHashed = Utilidades.Crypto.HashPasswordConBcrypt(dto.Password, 12);
+            string passHashed = Utilidades.Crypto.HashPasswordConBcrypt(dto.Password, 12);
 
 
             Usuario ret = new Usuario(new NombreCompleto(dto.Nombre, dto.Apellido), dto.Email, passHashed, r);
 
             return ret;
 
+        }
+
+        public static List<UsuarioDTO> FromListUsuarioToListUsuarioDTO(List<Usuario> usuarios)
+        {
+            List<UsuarioDTO> ret = new List<UsuarioDTO>();
+
+            foreach (Usuario u in usuarios)
+            {
+                ret.Add(FromUsuarioToDTOUsuario(u));
+            }
+
+            return ret;
+        }
+
+        public static UsuarioDTO FromUsuarioToDTOUsuario(Usuario u)
+        {
+            return new UsuarioDTO() { Id = u.Id, Nombre = u.NombreCompleto.Nombre, Apellido = u.NombreCompleto.Apellido, Email = u.Email, Rol = u.Rol.ToString() };
         }
     }
 }

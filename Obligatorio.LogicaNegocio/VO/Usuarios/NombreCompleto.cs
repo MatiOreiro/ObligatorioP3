@@ -2,12 +2,15 @@
 using Obligatorio.LogicaNegocio.CustomExceptions.UsuarioExceptions;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Obligatorio.LogicaNegocio.VO.Usuarios
 {
+    [ComplexType]
     public record NombreCompleto
     {
         public string Nombre { get; init; }
