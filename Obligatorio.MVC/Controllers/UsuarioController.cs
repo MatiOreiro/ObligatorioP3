@@ -121,10 +121,6 @@ namespace Obligatorio.MVC.Controllers
         public IActionResult Delete(int id)
         {
             var usuario = _CUObtenerUsuario.ObtenerUsuario(id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
             return View(usuario);
         }
 

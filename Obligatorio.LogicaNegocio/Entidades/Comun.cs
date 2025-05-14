@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Obligatorio.LogicaNegocio.Enumerados.EnvioEnums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Agencia Agencia { get; set; }
 
         public Comun() { }
-        public Comun(Agencia agencia)
+        public Comun(int nroTracking, Usuario funcionario, Usuario cliente, decimal peso, EstadoEnvio estado, Agencia agencia) : base(nroTracking, funcionario, cliente, peso, estado)
         {
             Agencia = agencia;
         }

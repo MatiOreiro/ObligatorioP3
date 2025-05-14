@@ -6,6 +6,10 @@ using System.Runtime.InteropServices;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Obligatorio.LogicaAplicacion.CasosUso.CUUsuario;
 using Obligatorio.LogicaAplicacion.ICasosUso.ICUUsuario;
+using Obligatorio.LogicaAplicacion.ICasosUso.ICUEnvio;
+using Obligatorio.LogicaAplicacion.CasosUso.CUEnvio;
+using Obligatorio.LogicaAplicacion.ICasosUso.ICUAgencia;
+using Obligatorio.LogicaAplicacion.CasosUso.CUAgencia;
 
 namespace Obligatorio.MVC
 {
@@ -36,6 +40,9 @@ namespace Obligatorio.MVC
             builder.Services.AddScoped<ICUObtenerUsuario, CUObtenerUsuario>();
             builder.Services.AddScoped<ICUEditarUsuario, CUEditarUsuario>();
             builder.Services.AddScoped<ICUEliminarUsuario, CUEliminarUsuario>();
+            builder.Services.AddScoped<ICUAltaEnvio, CUAltaEnvio>();
+            builder.Services.AddScoped<ICUObtenerEnvios, CUObtenerEnvios>();
+            builder.Services.AddScoped<ICUObtenerAgencias, CUObtenerAgencias>();
 
 
 

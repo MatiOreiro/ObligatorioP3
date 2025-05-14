@@ -15,8 +15,21 @@ namespace Obligatorio.LogicaNegocio.Entidades
         public Usuario Cliente { get; set; }
         public decimal Peso { get; set; }
         public EstadoEnvio Estado { get; set; }
-        public List<Seguimiento> Seguimiento { get; set; }
+        public List<Seguimiento> Seguimiento { get; set; } = new List<Seguimiento>();
 
-        
+        public Envio()
+        {
+        }
+
+        public Envio(int nroTracking, Usuario funcionario, Usuario cliente, decimal peso, EstadoEnvio estado)
+        {
+            NroTracking = nroTracking;
+            Funcionario = funcionario;
+            Cliente = cliente;
+            Peso = peso;
+            Estado = estado;
+        }
+
+
     }
 }

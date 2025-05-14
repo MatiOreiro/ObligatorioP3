@@ -27,7 +27,7 @@ namespace Obligatorio.LogicaAccesoDatos.Repositorios
 
         public List<Envio> FindAll()
         {
-            return _context.Envios.ToList();
+            return _context.Envios.Include(e => e.Funcionario).Include(e => e.Cliente).ToList();
         }
 
         public Envio FindById(int id)
