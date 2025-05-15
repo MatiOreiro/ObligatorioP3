@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Obligatorio.LogicaNegocio.Entidades
 {
-    public class Envio
+    public abstract class Envio
     {
         public int Id { get; set; }
         public int NroTracking { get; set; }
@@ -28,8 +28,10 @@ namespace Obligatorio.LogicaNegocio.Entidades
             Cliente = cliente;
             Peso = peso;
             Estado = estado;
+            Seguimiento sInicial = new Seguimiento(funcionario, "Envio creado");
+            Seguimiento.Add(sInicial);
         }
 
-
+        public abstract void FinalizarEnvio();
     }
 }

@@ -48,44 +48,48 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
                     @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoEnvio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NroTracking)
-            </td>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoEnvio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NroTracking)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreFuncionario)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreFuncionario)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreCliente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailCliente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Peso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Direccion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Valor)
-            </td>
-            <td>
-                @Html.ActionLink("Agregar comentario", "AgregarSeguimiento", new {/* id=item.PrimaryKey */}) |
-                @Html.ActionLink("Finalizar", "FinalizarEnvio", new { /* id=item.PrimaryKey */ })
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Peso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+                @if(item.Estado == "EN_PROCESO")
+                {
+                    <td>
+                        @Html.ActionLink("Agregar comentario", "AgregarSeguimiento", new {  id=item.Id  }) |
+                        @Html.ActionLink("Finalizar", "FinalizarEnvio", new {  id=item.Id  })
+                    </td>
+                    
+                }
         </tr>
 }
     </tbody>

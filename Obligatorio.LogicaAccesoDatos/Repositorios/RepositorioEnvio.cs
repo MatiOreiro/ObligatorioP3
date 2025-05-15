@@ -32,12 +32,11 @@ namespace Obligatorio.LogicaAccesoDatos.Repositorios
 
         public Envio FindById(int id)
         {
-            return _context.Envios.Where(a => a.Id.Equals(id)).SingleOrDefault();
+            return _context.Envios.Include(a => a.Cliente).Include(a => a.Funcionario).Where(a => a.Id.Equals(id)).SingleOrDefault();
         }
 
         public void Remove(int id)
         {
-            // cambiar el envio de en proceso a finalizado
             Envio e = _context.Envios.Where(x => x.Id == id).SingleOrDefault();
             _context.Envios.Remove(e);
             _context.SaveChanges();
@@ -45,7 +44,6 @@ namespace Obligatorio.LogicaAccesoDatos.Repositorios
 
         public int Update(Envio obj)
         {
-            // agregar un comentario al envio
             _context.Envios.Update(obj);
             _context.SaveChanges();
             return obj.Id;

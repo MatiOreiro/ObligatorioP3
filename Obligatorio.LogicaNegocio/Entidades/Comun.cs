@@ -16,5 +16,10 @@ namespace Obligatorio.LogicaNegocio.Entidades
         {
             Agencia = agencia;
         }
+
+        public override void FinalizarEnvio() 
+        {
+            this.Estado = EstadoEnvio.FINALIZADO;
+        }
     }
 }

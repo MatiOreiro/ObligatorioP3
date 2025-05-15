@@ -19,6 +19,19 @@ namespace Obligatorio.LogicaNegocio.Entidades
             Valor = valor;
         }
 
-
+        public override void FinalizarEnvio()
+        {
+            this.Estado = EstadoEnvio.FINALIZADO;
+            TimeSpan d24 = new TimeSpan(24, 0, 0);
+            TimeSpan dif = DateTime.Now - this.Seguimiento[0].Fecha;
+            if (dif > d24)
+            {
+                this.Valor = "No fue eficiente";
+            }
+            else
+            {
+                this.Valor = "Fue eficiente";
+            }
+        }
     }
 }

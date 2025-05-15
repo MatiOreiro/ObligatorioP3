@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Obligatorio.DTOs.DTOs.DTOEnvio;
 using Obligatorio.LogicaAplicacion.ICasosUso.ICUAgencia;
 using Obligatorio.LogicaAplicacion.ICasosUso.ICUEnvio;
 using Obligatorio.MVC.Filtros;
@@ -12,12 +13,16 @@ namespace Obligatorio.MVC.Controllers
         private ICUAltaEnvio _CUAltaEnvio;
         private ICUObtenerEnvios _CUObtenerEnvios;
         private ICUObtenerAgencias _CUObtenerAgencias;
+        private ICUObtenerEnvio _CUObtenerEnvio;
+        private ICUFinalizarEnvio _CUFinalizarEnvio;
 
-        public EnvioController(ICUAltaEnvio cuAltaEnvio, ICUObtenerEnvios cUObtenerEnvios, ICUObtenerAgencias cUObtenerAgencias)
+        public EnvioController(ICUAltaEnvio cuAltaEnvio, ICUObtenerEnvios cUObtenerEnvios, ICUObtenerAgencias cUObtenerAgencias, ICUObtenerEnvio cUObtenerEnvio, ICUFinalizarEnvio cUFinalizarEnvio)
         {
             _CUAltaEnvio = cuAltaEnvio;
             _CUObtenerEnvios = cUObtenerEnvios;
             _CUObtenerAgencias = cUObtenerAgencias;
+            _CUObtenerEnvio = cUObtenerEnvio;
+            _CUFinalizarEnvio = cUFinalizarEnvio;
         }
 
         [LogueadoAuthorize]
@@ -60,6 +65,28 @@ namespace Obligatorio.MVC.Controllers
             }
 
             return View(vm);
+        }
+
+        [LogueadoAuthorize]
+        public IActionResult FinalizarEnvio(int id)
+        {
+            var envio = _CUObtenerEnvio.ObtenerEnvio(id);
+            return View(envio);
+        }
+        [HttpPost, ActionName("FinalizarEnvio")]
+        [LogueadoAuthorize]
+        public IActionResult FinalizarEnvioConfirmed(int id)
+        {
+            try
+            {
+                _CUFinalizarEnvio.FinalizarEnvio(id);
+                return RedirectToAction("Index", "Envio");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.msg = ex.Message;
+            }
+            return View();
         }
     }
 }

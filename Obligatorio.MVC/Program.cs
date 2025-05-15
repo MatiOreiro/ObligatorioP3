@@ -43,7 +43,8 @@ namespace Obligatorio.MVC
             builder.Services.AddScoped<ICUAltaEnvio, CUAltaEnvio>();
             builder.Services.AddScoped<ICUObtenerEnvios, CUObtenerEnvios>();
             builder.Services.AddScoped<ICUObtenerAgencias, CUObtenerAgencias>();
-
+            builder.Services.AddScoped<ICUObtenerEnvio, CUObtenerEnvio>();
+            builder.Services.AddScoped<ICUFinalizarEnvio, CUFinalizarEnvio>();
 
 
 
