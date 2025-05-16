@@ -27,12 +27,12 @@ namespace Obligatorio.LogicaAccesoDatos.Repositorios
 
         public List<Envio> FindAll()
         {
-            return _context.Envios.Include(e => e.Funcionario).Include(e => e.Cliente).ToList();
+            return _context.Envios.Include(a => a.Seguimiento).Include(e => e.Funcionario).Include(e => e.Cliente).ToList();
         }
 
         public Envio FindById(int id)
         {
-            return _context.Envios.Include(a => a.Cliente).Include(a => a.Funcionario).Where(a => a.Id.Equals(id)).SingleOrDefault();
+            return _context.Envios.Include(a => a.Seguimiento).Include(a => a.Cliente).Include(a => a.Funcionario).Where(a => a.Id.Equals(id)).SingleOrDefault();
         }
 
         public void Remove(int id)

@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Envíos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nuevo envío</a>
 </p>
 <table class="table">
     <thead>
@@ -39,12 +39,9 @@
                 @Html.DisplayNameFor(model => model.Estado)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Direccion)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Valor)
             </th>
-            <th></th>
+
         </tr>
     </thead>
     <tbody>
@@ -76,17 +73,24 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Estado)
                 </td>
+                @if(item.Valor != null)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Valor)
+                    </td>
+                }
+                else{
                 <td>
-                    @Html.DisplayFor(modelItem => item.Direccion)
+                    "N/D"
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Valor)
-                </td>
+                }
+
                 @if(item.Estado == "EN_PROCESO")
                 {
                     <td>
                         @Html.ActionLink("Agregar comentario", "AgregarSeguimiento", new {  id=item.Id  }) |
-                        @Html.ActionLink("Finalizar", "FinalizarEnvio", new {  id=item.Id  })
+                        @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Finalizar", "FinalizarEnvio", new { id = item.Id })
                     </td>
                     
                 }

@@ -19,7 +19,7 @@ namespace Obligatorio.DTOs.Mappers
             }
             else
             {
-                nuevo = new Urgente(0, null, null, dto.Peso, LogicaNegocio.Enumerados.EnvioEnums.EstadoEnvio.EN_PROCESO, dto.Direccion, dto.Valor);
+                nuevo = new Urgente(0, null, null, dto.Peso, LogicaNegocio.Enumerados.EnvioEnums.EstadoEnvio.EN_PROCESO, dto.Direccion, null);
             }
             return nuevo;
         }

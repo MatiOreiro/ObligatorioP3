@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Obligatorio.DTOs.DTOs.DTOEnvio;
+using Obligatorio.DTOs.DTOs.DTOSeguimiento;
 using Obligatorio.LogicaAplicacion.ICasosUso.ICUAgencia;
 using Obligatorio.LogicaAplicacion.ICasosUso.ICUEnvio;
 using Obligatorio.MVC.Filtros;
@@ -15,14 +16,18 @@ namespace Obligatorio.MVC.Controllers
         private ICUObtenerAgencias _CUObtenerAgencias;
         private ICUObtenerEnvio _CUObtenerEnvio;
         private ICUFinalizarEnvio _CUFinalizarEnvio;
+        private ICUAgregarSeguimiento _CUAgregarSeguimiento;
+        private ICUObtenerComentarios _CUObtenerComentarios;
 
-        public EnvioController(ICUAltaEnvio cuAltaEnvio, ICUObtenerEnvios cUObtenerEnvios, ICUObtenerAgencias cUObtenerAgencias, ICUObtenerEnvio cUObtenerEnvio, ICUFinalizarEnvio cUFinalizarEnvio)
+        public EnvioController(ICUAltaEnvio cuAltaEnvio, ICUObtenerEnvios cUObtenerEnvios, ICUObtenerAgencias cUObtenerAgencias, ICUObtenerEnvio cUObtenerEnvio, ICUFinalizarEnvio cUFinalizarEnvio, ICUAgregarSeguimiento cUAgregarSeguimiento, ICUObtenerComentarios cUObtenerComentarios)
         {
             _CUAltaEnvio = cuAltaEnvio;
             _CUObtenerEnvios = cUObtenerEnvios;
             _CUObtenerAgencias = cUObtenerAgencias;
             _CUObtenerEnvio = cUObtenerEnvio;
             _CUFinalizarEnvio = cUFinalizarEnvio;
+            _CUAgregarSeguimiento = cUAgregarSeguimiento;
+            _CUObtenerComentarios = cUObtenerComentarios;
         }
 
         [LogueadoAuthorize]
@@ -88,5 +93,43 @@ namespace Obligatorio.MVC.Controllers
             }
             return View();
         }
+
+        [LogueadoAuthorize]
+        public IActionResult AgregarSeguimiento(int id)
+        {
+            AgregarSeguimientoViewModel vm = new AgregarSeguimientoViewModel();
+            EnvioDTO envio = _CUObtenerEnvio.ObtenerEnvio(id);
+            vm.EnvioDTO = envio;
+            return View(vm);
+        }
+        [HttpPost]
+        public IActionResult AgregarSeguimiento(AgregarSeguimientoViewModel vm)
+        {
+            try
+            {
+                int lId = (int)HttpContext.Session.GetInt32("LogueadoId");
+                vm.AgregarSeguimientoDTO.LogueadoId = lId;
+                _CUAgregarSeguimiento.AgregarSeguimiento(vm.AgregarSeguimientoDTO);
+                return RedirectToAction("Index", "Envio");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.msg = ex.Message;
+            }
+            return View(vm);
+        }
+        [LogueadoAuthorize]
+        public IActionResult Details(int id)
+        {
+            MostrarComentariosViewModel vm = new MostrarComentariosViewModel();
+            EnvioDTO envio = _CUObtenerEnvio.ObtenerEnvio(id);
+            List<SeguimientoDTO> comentarios = _CUObtenerComentarios.ObtenerComentarios(id);
+            vm.EnvioDTO = envio;
+            vm.Comentarios = comentarios;
+            return View(vm);
+        }
+
+        
+
     }
 }

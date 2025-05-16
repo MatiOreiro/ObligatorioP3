@@ -46,6 +46,7 @@ namespace Obligatorio.LogicaAplicacion.CasosUso.CUEnvio
                 envio.Cliente = cliente;
                 string nroTracking = DateTime.Now.ToString("MMddmmss") + dto.IdFuncionario;
                 envio.NroTracking = int.Parse(nroTracking);
+                envio.Seguimiento.Add(new Seguimiento(funcionario, "Envio creado"));
                 int idIns = _repoEnvio.Add(envio);
 
                 Auditoria aud = new Auditoria(dto.IdFuncionario, "ALTA", "ENVIO", idIns.ToString(), JsonSerializer.Serialize(envio));

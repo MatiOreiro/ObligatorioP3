@@ -28,9 +28,8 @@ namespace Obligatorio.LogicaNegocio.Entidades
             Cliente = cliente;
             Peso = peso;
             Estado = estado;
-            Seguimiento sInicial = new Seguimiento(funcionario, "Envio creado");
-            Seguimiento.Add(sInicial);
         }
+
 
         public abstract void FinalizarEnvio();
     }
