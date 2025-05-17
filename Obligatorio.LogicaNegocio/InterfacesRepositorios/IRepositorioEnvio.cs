@@ -9,6 +9,6 @@ namespace Obligatorio.LogicaNegocio.InterfacesRepositorios
 {
     public interface IRepositorioEnvio : IRepositorio<Envio>
     {
-
+        Envio FindByTracking(int nroTracking);
     }
 }

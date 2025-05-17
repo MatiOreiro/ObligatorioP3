@@ -47,6 +47,7 @@ namespace Obligatorio.MVC
             builder.Services.AddScoped<ICUFinalizarEnvio, CUFinalizarEnvio>();
             builder.Services.AddScoped<ICUAgregarSeguimiento, CUAgregarSeguimiento>();
             builder.Services.AddScoped<ICUObtenerComentarios, CUObtenerComentarios>();
+            builder.Services.AddScoped<ICUObtenerEnvioPorTracking, CUObtenerEnvioPorTracking>();
 
 
 

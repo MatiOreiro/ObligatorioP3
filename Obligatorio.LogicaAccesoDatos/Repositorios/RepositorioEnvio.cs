@@ -48,5 +48,9 @@ namespace Obligatorio.LogicaAccesoDatos.Repositorios
             _context.SaveChanges();
             return obj.Id;
         }
+        public Envio FindByTracking(int nroTracking)
+        {
+            return _context.Envios.Include(a => a.Seguimiento).Include(a => a.Cliente).Include(a => a.Funcionario).Where(a => a.NroTracking.Equals(nroTracking)).SingleOrDefault();
+        }
     }
 }
