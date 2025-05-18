@@ -1,6 +1,7 @@
 ﻿using Obligatorio.DTOs.DTOs.DTOEnvio;
 using Obligatorio.DTOs.Mappers;
 using Obligatorio.LogicaAplicacion.ICasosUso.ICUEnvio;
+using Obligatorio.LogicaNegocio.CustomExceptions.SeguimientoExceptions;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 using System;
@@ -25,13 +26,21 @@ namespace Obligatorio.LogicaAplicacion.CasosUso.CUEnvio
         }
         public void AgregarSeguimiento(AgregarSeguimientoDTO dto)
         {
-            Envio envio = _repoEnvio.FindById(dto.IdEnvio);
-            Seguimiento s = MapperSeguimiento.FromAgregarSeguimientoDTOToSeguimiento(dto);
-            Usuario funcionario = _repoUsuario.FindById(dto.LogueadoId);
-            s.Funcionario = funcionario;
-            envio.Seguimiento.Add(s);
-            _repoEnvio.Update(envio);
-            _repoAuditoria.Auditar(new Auditoria(dto.LogueadoId, "AGREGA", "SEGUIMIENTO", dto.IdEnvio.ToString(), JsonSerializer.Serialize(s)));
+            if(dto.Comentario.Length == 0)
+            {
+                throw new ComentarioVacioException("El comentario no puede estar vacío");
+            }
+            else
+            {
+                Envio envio = _repoEnvio.FindById(dto.IdEnvio);
+                Seguimiento s = MapperSeguimiento.FromAgregarSeguimientoDTOToSeguimiento(dto);
+                Usuario funcionario = _repoUsuario.FindById(dto.LogueadoId);
+                s.Funcionario = funcionario;
+                envio.Seguimiento.Add(s);
+                _repoEnvio.Update(envio);
+                _repoAuditoria.Auditar(new Auditoria(dto.LogueadoId, "AGREGA", "SEGUIMIENTO", dto.IdEnvio.ToString(), JsonSerializer.Serialize(s)));
+            }
+
 
         }
     }

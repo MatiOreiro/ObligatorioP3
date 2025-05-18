@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Obligatorio.LogicaAccesoDatos.Migrations
 {
     /// <inheritdoc />
-    public partial class mInicial : Migration
+    public partial class Base : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -71,7 +71,7 @@ namespace Obligatorio.LogicaAccesoDatos.Migrations
                     NroTracking = table.Column<int>(type: "int", nullable: false),
                     FuncionarioId = table.Column<int>(type: "int", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
-                    Peso = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Peso = table.Column<decimal>(type: "decimal(18,4)", precision: 18, scale: 4, nullable: false),
                     Estado = table.Column<int>(type: "int", nullable: false),
                     TipoDeEnvio = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     AgenciaId = table.Column<int>(type: "int", nullable: true),

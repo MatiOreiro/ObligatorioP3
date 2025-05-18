@@ -1,6 +1,7 @@
 ﻿using Obligatorio.DTOs.DTOs.DTOEnvio;
 using Obligatorio.DTOs.Mappers;
 using Obligatorio.LogicaAplicacion.ICasosUso.ICUEnvio;
+using Obligatorio.LogicaNegocio.CustomExceptions.EnvioExceptions;
 using Obligatorio.LogicaNegocio.Entidades;
 using Obligatorio.LogicaNegocio.InterfacesRepositorios;
 using System;
@@ -31,26 +32,43 @@ namespace Obligatorio.LogicaAplicacion.CasosUso.CUEnvio
         {
             try
             {
-                Agencia agencia = _repoAgencia.FindById(dto.IdAgencia);
-                Usuario funcionario = _repoUsuario.FindById(dto.IdFuncionario);
-                Usuario cliente = _repoUsuario.FindByEmail(dto.MailCliente);
-                Envio envio = MapperEnvio.FromAltaEnvioDTOToEnvio(dto);
-
-                if (dto.TipoEnvio.Equals("comun"))
+                if(dto.Peso <= 0)
                 {
-                    Comun e = envio as Comun;
-                    e.Agencia = agencia;
+                    throw new PesoInvalidoException("El peso no puede ser menor o igual a cero");
+                }
+                else
+                {
+                    Agencia agencia = _repoAgencia.FindById(dto.IdAgencia);
+                    Usuario funcionario = _repoUsuario.FindById(dto.IdFuncionario);
+                    Usuario cliente = _repoUsuario.FindByEmail(dto.MailCliente);
+                    if (cliente == null)
+                    {
+                        throw new ClienteNoValidoException("No se encontró al cliente");
+                    }
+                    else
+                    {
+                        Envio envio = MapperEnvio.FromAltaEnvioDTOToEnvio(dto);
+
+                        if (dto.TipoEnvio.Equals("comun"))
+                        {
+                            Comun e = envio as Comun;
+                            e.Agencia = agencia;
+                        }
+
+                        envio.Funcionario = funcionario;
+                        envio.Cliente = cliente;
+                        string nroTracking = DateTime.Now.ToString("MMddmmss") + dto.IdFuncionario;
+                        envio.NroTracking = int.Parse(nroTracking);
+                        envio.Seguimiento.Add(new Seguimiento(funcionario, "Envio creado"));
+
+                        int idIns = _repoEnvio.Add(envio);
+
+                        Auditoria aud = new Auditoria(dto.IdFuncionario, "ALTA", "ENVIO", idIns.ToString(), JsonSerializer.Serialize(envio));
+                        _repoAuditoria.Auditar(aud);
+                    }
+
                 }
 
-                envio.Funcionario = funcionario;
-                envio.Cliente = cliente;
-                string nroTracking = DateTime.Now.ToString("MMddmmss") + dto.IdFuncionario;
-                envio.NroTracking = int.Parse(nroTracking);
-                envio.Seguimiento.Add(new Seguimiento(funcionario, "Envio creado"));
-                int idIns = _repoEnvio.Add(envio);
-
-                Auditoria aud = new Auditoria(dto.IdFuncionario, "ALTA", "ENVIO", idIns.ToString(), JsonSerializer.Serialize(envio));
-                _repoAuditoria.Auditar(aud);
             }
             catch (Exception ex)
             {

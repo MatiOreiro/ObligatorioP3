@@ -12,8 +12,8 @@ using Obligatorio.LogicaAccesoDatos;
 namespace Obligatorio.LogicaAccesoDatos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250430132952_mInicial")]
-    partial class mInicial
+    [Migration("20250518202955_Base")]
+    partial class Base
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,7 +98,8 @@ namespace Obligatorio.LogicaAccesoDatos.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Peso")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(18, 4)
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<string>("TipoDeEnvio")
                         .IsRequired()
